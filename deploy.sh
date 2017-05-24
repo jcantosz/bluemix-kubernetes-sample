@@ -23,8 +23,8 @@ let NU=$(awk '/^  # type: LoadBalancer/{ print NR; exit }' guestbook.yml)+3
 NU=$NU\i
 sed -i "$NU\ \ type: NodePort" guestbook.yml #For OSX: brew install gnu-sed; replace sed references with gsed
 
-echo -e "Deleting previous version of guestbook if it exists"
-kubectl delete --ignore-not-found=true   -f guestbook.yml
+#echo -e "Deleting previous version of guestbook if it exists"
+#kubectl delete --ignore-not-found=true   -f guestbook.yml
 
 #echo -e "Creating pods"
 #kubectl create -f guestbook.yml
