@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# If running on a mac, use gsed (must install before runing this script)
 [ $(uname) == "Darwin" ] && alias sed="gsed";
 
 echo "Create Guestbook"
