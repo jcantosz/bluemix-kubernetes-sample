@@ -8,14 +8,22 @@ if [ -z $CF_SPACE ]; then
 fi
 
 
-if [ -z "$BLUEMIX_USER" ] || [ -z "$BLUEMIX_PASSWORD" ] || [ -z "$BLUEMIX_ACCOUNT" ]; then
+#Check for api key or PW
+if [ -z "$BLUEMIX_USER" ] || [[ -z "$BLUEMIX_PASSWORD" && -z "$BLUEMIX_API_KEY" ]] || [ -z "$BLUEMIX_ACCOUNT" ]; then
   echo "Define all required environment variables and rerun the stage."
   exit 1
 fi
 echo "Deploy pods"
 
 echo "bx login -a $CF_TARGET_URL"
-bx login -a "$CF_TARGET_URL" -u "$BLUEMIX_USER" -p "$BLUEMIX_PASSWORD" -c "$BLUEMIX_ACCOUNT" -o "$CF_ORG" -s "$CF_SPACE"
+
+# Use API_KEY if exists
+if [ -n "$BLUMEIX_API_KEY" ]; then
+  bx login -a "$CF_TARGET_URL" --apikey "$BLUEMIX_API_KEY" -u "$BLUEMIX_USER" -c "$BLUEMIX_ACCOUNT" -o "$CF_ORG" -s "$CF_SPACE"
+else
+  bx login -a "$CF_TARGET_URL" -u "$BLUEMIX_USER" -p "$BLUEMIX_PASSWORD" -c "$BLUEMIX_ACCOUNT" -o "$CF_ORG" -s "$CF_SPACE"
+fi
+
 if [ $? -ne 0 ]; then
   echo "Failed to authenticate to Bluemix"
   exit 1
