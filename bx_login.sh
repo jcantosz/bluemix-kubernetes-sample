@@ -19,7 +19,7 @@ echo "bx login -a $CF_TARGET_URL"
 
 # Use API_KEY if exists
 if [ -n "$BLUMEIX_API_KEY" ]; then
-  bx login -a "$CF_TARGET_URL" --apikey "$BLUEMIX_API_KEY" -u "$BLUEMIX_USER" -c "$BLUEMIX_ACCOUNT" -o "$CF_ORG" -s "$CF_SPACE"
+  bx login -a "$CF_TARGET_URL" --apikey "$BLUEMIX_API_KEY" -o "$CF_ORG" -s "$CF_SPACE"
 else
   bx login -a "$CF_TARGET_URL" -u "$BLUEMIX_USER" -p "$BLUEMIX_PASSWORD" -c "$BLUEMIX_ACCOUNT" -o "$CF_ORG" -s "$CF_SPACE"
 fi
