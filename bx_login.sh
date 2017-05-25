@@ -9,7 +9,7 @@ fi
 
 
 #Check for api key or PW
-if [ -z "$BLUEMIX_USER" ] || [[ -z "$BLUEMIX_PASSWORD" && -z "$BLUEMIX_API_KEY" ]] || [ -z "$BLUEMIX_ACCOUNT" ]; then
+if [[ -z "$BLUEMIX_USER" || -z "$BLUEMIX_PASSWORD" || -z "$BLUEMIX_ACCOUNT" ]] && [ -z "$BLUEMIX_API_KEY" ]; then
   echo "Define all required environment variables and rerun the stage."
   exit 1
 fi
